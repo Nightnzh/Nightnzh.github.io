@@ -37,9 +37,6 @@ C = {
   "locationLabel":  ("Location", "Location"),
   "location":       ("桃園，台灣", "Taoyuan, Taiwan"),
   "availability":   ("可配合台北／新北・對遠端工作有興趣", "Open to Taipei / New Taipei & remote"),
-  "openSourceLabel":("Open Source", "Open Source"),
-  "openSourceDesc": ("版本化的 agent skills monorepo，含 schema 驗證、自動產生文件與 CI。",
-                     "Versioned monorepo of agent skills with schema validation, generated docs and CI."),
   "eduLabel":  ("Education", "Education"),
   "eduSchool": ("國立虎尾科技大學", "National Formosa University"),
   "eduDept":   ("資訊工程系", "B.E., Computer Science & Information Engineering"),
@@ -233,6 +230,47 @@ DOC = f"""<!doctype html>
     .jmeta {{ text-align:left; }}
     .srow {{ grid-template-columns:1fr; gap:3px; padding:10px 0; }}
   }}
+  @media print {{
+    @page {{ size:A4; margin:13mm 14mm; }}
+    :root {{ --bg:#fff; --card:#fff; }}
+    body {{ background:#fff; font-size:11px; }}
+    .wrap {{ max-width:none; padding:0; }}
+    .lang {{ display:none; }}          /* 切換鈕在紙上沒有意義 */
+    /* A4 的 CSS 寬度約 794px < 920px，手機斷點會一起套用進來；
+       以下幾條把被覆寫掉的桌機排版拉回來，否則縱向空間浪費很大。 */
+    .top {{ flex-direction:row; align-items:center; padding:0 0 14px; }}
+    .id img {{ width:84px; height:84px; }}
+    h1 {{ font-size:25px; }}
+    .sub {{ font-size:12.5px; }}
+    .kicker {{ font-size:9px; }}
+    .tagline {{ font-size:16px; padding:16px 0 6px; max-width:none; }}
+    .taglinesub {{ font-size:11px; line-height:1.6; padding-bottom:16px; max-width:none; }}
+    .flow {{ padding:14px 16px 12px; break-inside:avoid; }}
+    .flowscroll {{ overflow:visible; }}
+    .flow svg {{ min-width:0; }}
+    .flowcap {{ font-size:10px; margin-top:10px; }}
+    .principles {{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; padding:20px 0 0; break-inside:avoid; }}
+    .ptitle {{ font-size:12.5px; }}
+    .pbody {{ font-size:10px; line-height:1.55; }}
+    .split {{ margin:20px 0 0; }}
+    /* A4 內容寬度放不下 268px 側欄 + 主欄，改為單欄、側欄橫排 */
+    .cols {{ grid-template-columns:1fr; gap:18px; padding-top:18px; }}
+    .rail {{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:start; }}
+    .rail .small, .rail .period {{ font-size:9.5px; }}
+    .rail a, .rail div {{ font-size:10.5px; }}
+    .main {{ gap:20px; }}
+    .job {{ break-inside:avoid; padding-bottom:14px; }}
+    .jobhead {{ flex-direction:row; align-items:baseline; }}
+    .jmeta {{ text-align:right; }}
+    .jrole {{ font-size:14px; }}
+    .jorg, .intro {{ font-size:11px; }}
+    .job li {{ font-size:10.5px; line-height:1.5; }}
+    .srow {{ grid-template-columns:120px minmax(0,1fr); gap:16px; padding:6px 0; break-inside:avoid; }}
+    .sval {{ font-size:10.5px; line-height:1.5; }}
+    .cta {{ padding:14px 16px; break-inside:avoid; }}
+    .cta p, .cta a {{ font-size:11px; }}
+    a {{ border-bottom:none; }}
+  }}
   @media (max-width:480px) {{
     .wrap {{ padding:0 20px 56px; }}
     h1 {{ font-size:26px; }}
@@ -320,11 +358,6 @@ DOC = f"""<!doctype html>
         <div class="blabel mono" {t('locationLabel')}</div>
         <div {t('location')}</div>
         <div class="small" {t('availability')}</div>
-      </div>
-      <div class="block">
-        <div class="blabel mono" {t('openSourceLabel')}</div>
-        <a href="https://github.com/Nightnzh/my_skills"><strong>my_skills</strong></a>
-        <div class="small" {t('openSourceDesc')}</div>
       </div>
       <div class="block">
         <div class="blabel mono" {t('eduLabel')}</div>

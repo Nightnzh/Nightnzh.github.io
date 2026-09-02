@@ -114,6 +114,47 @@
     .jmeta { text-align:left; }
     .srow { grid-template-columns:1fr; gap:3px; padding:10px 0; }
   }
+  @media print {
+    @page { size:A4; margin:13mm 14mm; }
+    :root { --bg:#fff; --card:#fff; }
+    body { background:#fff; font-size:11px; }
+    .wrap { max-width:none; padding:0; }
+    .lang { display:none; }          /* 切換鈕在紙上沒有意義 */
+    /* A4 的 CSS 寬度約 794px < 920px，手機斷點會一起套用進來；
+       以下幾條把被覆寫掉的桌機排版拉回來，否則縱向空間浪費很大。 */
+    .top { flex-direction:row; align-items:center; padding:0 0 14px; }
+    .id img { width:84px; height:84px; }
+    h1 { font-size:25px; }
+    .sub { font-size:12.5px; }
+    .kicker { font-size:9px; }
+    .tagline { font-size:16px; padding:16px 0 6px; max-width:none; }
+    .taglinesub { font-size:11px; line-height:1.6; padding-bottom:16px; max-width:none; }
+    .flow { padding:14px 16px 12px; break-inside:avoid; }
+    .flowscroll { overflow:visible; }
+    .flow svg { min-width:0; }
+    .flowcap { font-size:10px; margin-top:10px; }
+    .principles { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; padding:20px 0 0; break-inside:avoid; }
+    .ptitle { font-size:12.5px; }
+    .pbody { font-size:10px; line-height:1.55; }
+    .split { margin:20px 0 0; }
+    /* A4 內容寬度放不下 268px 側欄 + 主欄，改為單欄、側欄橫排 */
+    .cols { grid-template-columns:1fr; gap:18px; padding-top:18px; }
+    .rail { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:start; }
+    .rail .small, .rail .period { font-size:9.5px; }
+    .rail a, .rail div { font-size:10.5px; }
+    .main { gap:20px; }
+    .job { break-inside:avoid; padding-bottom:14px; }
+    .jobhead { flex-direction:row; align-items:baseline; }
+    .jmeta { text-align:right; }
+    .jrole { font-size:14px; }
+    .jorg, .intro { font-size:11px; }
+    .job li { font-size:10.5px; line-height:1.5; }
+    .srow { grid-template-columns:120px minmax(0,1fr); gap:16px; padding:6px 0; break-inside:avoid; }
+    .sval { font-size:10.5px; line-height:1.5; }
+    .cta { padding:14px 16px; break-inside:avoid; }
+    .cta p, .cta a { font-size:11px; }
+    a { border-bottom:none; }
+  }
   @media (max-width:480px) {
     .wrap { padding:0 20px 56px; }
     h1 { font-size:26px; }
@@ -203,11 +244,6 @@
         <div class="small" data-i="availability">可配合台北／新北・對遠端工作有興趣</div>
       </div>
       <div class="block">
-        <div class="blabel mono" data-i="openSourceLabel">Open Source</div>
-        <a href="https://github.com/Nightnzh/my_skills"><strong>my_skills</strong></a>
-        <div class="small" data-i="openSourceDesc">版本化的 agent skills monorepo，含 schema 驗證、自動產生文件與 CI。</div>
-      </div>
-      <div class="block">
         <div class="blabel mono" data-i="eduLabel">Education</div>
         <div class="strong" data-i="eduSchool">國立虎尾科技大學</div>
         <div class="small" data-i="eduDept">資訊工程系</div>
@@ -278,7 +314,7 @@
 <script>
 // 中文已在 HTML 內；載入時把它收割成 zh 字典，英文取自 EN。
 (function () {
-  var EN = {"kicker": "Agent Workflows · Android", "name": "Kevin Hsu", "nameAlt": "許証皓 · Android / App Engineer", "tagline": "I turn my own development process into agent workflows — so domain rules become something reviewable and repeatable.", "taglineSub": "Not “using AI to write code faster”. The point is to take the judgement that actually catches bugs — who owns a hardware event listener, how payment stages hand over, where product lines must stay isolated — and move it out of one engineer’s head into a check that runs on every change.", "flowLabel": "Review Workflow", "n1": "diff", "n2": "dispatch", "n3a": "Correctness & dead code", "n3b": "Hardware event lifecycle", "n3c": "Flavor leaks & compatibility", "n4": "adversarial verify", "n5": "verdict + file:line", "flowFanout": "FAN-OUT", "flowVerify": "VERIFY", "flowCaption": "A merge request fans out into parallel reviews by domain; each finding then goes to independent verifiers whose job is to refute it — only what survives reaches the verdict. Running against an Android product line that ships to real stores, not a toy repo.", "p1t": "Rules must execute, not just be documented", "p1b": "Review conventions written in a doc get forgotten. Encoded as skills and subagents, they run on every change — and point at a specific file and line.", "p2t": "Reproduce first, then fix", "p2b": "A bugfix means writing a failing test and making it pass. Agents are held to the same bar: produce evidence that reproduces the problem before proposing a fix.", "p3t": "Never trust a single verdict", "p3b": "One agent can be confidently wrong. Independent verifiers try to refute each finding; only what cannot be refuted survives.", "contactLabel": "Contact", "locationLabel": "Location", "location": "Taoyuan, Taiwan", "availability": "Open to Taipei / New Taipei & remote", "openSourceLabel": "Open Source", "openSourceDesc": "Versioned monorepo of agent skills with schema validation, generated docs and CI.", "eduLabel": "Education", "eduSchool": "National Formosa University", "eduDept": "B.E., Computer Science & Information Engineering", "eduPeriod": "2015 — 2019", "expLabel": "Experience", "expIntro": "That workflow was not designed in the abstract — it grew on the product line below: real money, real hardware, real units already in the field.", "j1role": "Android Software Engineer", "j1org": "Cashier Tech", "j1period": "Aug 2022 — Present", "j1place": "New Taipei City", "j2role": "Software Engineer (Android)", "j2org": "Zhen Ding Tech Group", "j2period": "Mar 2020 — Sep 2021", "j2place": "Taoyuan", "skillsLabel": "Skills", "ctaLabel": "Open to Opportunities", "ctaBody": "Open to new opportunities: Android / mobile, or work on getting agent workflows genuinely into a team’s development process. Happy to walk through architecture and trade-offs.", "j1p0": "Encoded review domain rules into tooling: hardware-event observer lifecycles, payment stage transitions, and isolation checks across three product lines (kiosk / pos / cubbies)", "j1p1": "Led the re-architecture of the payment module, migrating Java MVP to Kotlin MVVM incrementally, cutting coupling and making it testable", "j1p2": "Introduced MockK + Robolectric unit testing on payment, loyalty-point and coupon logic, wired into GitLab CI", "j1p3": "Integrated multiple payment providers plus bill acceptors and coin hoppers, covering multi-stage change-return and refund flows", "j1p4": "Led the AGP 8.13.2 + Kotlin 2.0 upgrade and built a Jetpack Compose design system with a reusable component library", "j1p5": "Integrated USB / serial / TCP peripherals and maintained LAN NSD device discovery with fault-tolerant background sync", "j2p0": "Modernised a legacy Eclipse project into Android Studio and developed SDK modules", "j2p1": "Introduced MVVM, establishing code structure conventions and lowering maintenance cost", "j2p2": "Built and maintained internal apps that improved operational efficiency company-wide", "sk0v": "Claude Code skills & subagents · MCP servers · multi-stage agent workflow design · review automation · structured output and verification", "sk1v": "Kotlin · Java · Python · TypeScript · Dart", "sk2v": "Jetpack Compose · MVVM (ViewModel / LiveData / Coroutines / Flow) · Room · CameraX · multi-module Gradle · product flavors · AGP 8 · Kotlin 2.0 · Kotlin KMP · Flutter", "sk3v": "JUnit · MockK · Robolectric · GitLab CI · detekt / checkstyle / lint", "sk4v": "USB / serial / TCP · bill acceptors · coin hoppers · thermal receipt and label printers · barcode scanners · LAN NSD device discovery", "sk5v": "Spring Boot · REST API · WebSocket (STOMP)"};
+  var EN = {"kicker": "Agent Workflows · Android", "name": "Kevin Hsu", "nameAlt": "許証皓 · Android / App Engineer", "tagline": "I turn my own development process into agent workflows — so domain rules become something reviewable and repeatable.", "taglineSub": "Not “using AI to write code faster”. The point is to take the judgement that actually catches bugs — who owns a hardware event listener, how payment stages hand over, where product lines must stay isolated — and move it out of one engineer’s head into a check that runs on every change.", "flowLabel": "Review Workflow", "n1": "diff", "n2": "dispatch", "n3a": "Correctness & dead code", "n3b": "Hardware event lifecycle", "n3c": "Flavor leaks & compatibility", "n4": "adversarial verify", "n5": "verdict + file:line", "flowFanout": "FAN-OUT", "flowVerify": "VERIFY", "flowCaption": "A merge request fans out into parallel reviews by domain; each finding then goes to independent verifiers whose job is to refute it — only what survives reaches the verdict. Running against an Android product line that ships to real stores, not a toy repo.", "p1t": "Rules must execute, not just be documented", "p1b": "Review conventions written in a doc get forgotten. Encoded as skills and subagents, they run on every change — and point at a specific file and line.", "p2t": "Reproduce first, then fix", "p2b": "A bugfix means writing a failing test and making it pass. Agents are held to the same bar: produce evidence that reproduces the problem before proposing a fix.", "p3t": "Never trust a single verdict", "p3b": "One agent can be confidently wrong. Independent verifiers try to refute each finding; only what cannot be refuted survives.", "contactLabel": "Contact", "locationLabel": "Location", "location": "Taoyuan, Taiwan", "availability": "Open to Taipei / New Taipei & remote", "eduLabel": "Education", "eduSchool": "National Formosa University", "eduDept": "B.E., Computer Science & Information Engineering", "eduPeriod": "2015 — 2019", "expLabel": "Experience", "expIntro": "That workflow was not designed in the abstract — it grew on the product line below: real money, real hardware, real units already in the field.", "j1role": "Android Software Engineer", "j1org": "Cashier Tech", "j1period": "Aug 2022 — Present", "j1place": "New Taipei City", "j2role": "Software Engineer (Android)", "j2org": "Zhen Ding Tech Group", "j2period": "Mar 2020 — Sep 2021", "j2place": "Taoyuan", "skillsLabel": "Skills", "ctaLabel": "Open to Opportunities", "ctaBody": "Open to new opportunities: Android / mobile, or work on getting agent workflows genuinely into a team’s development process. Happy to walk through architecture and trade-offs.", "j1p0": "Encoded review domain rules into tooling: hardware-event observer lifecycles, payment stage transitions, and isolation checks across three product lines (kiosk / pos / cubbies)", "j1p1": "Led the re-architecture of the payment module, migrating Java MVP to Kotlin MVVM incrementally, cutting coupling and making it testable", "j1p2": "Introduced MockK + Robolectric unit testing on payment, loyalty-point and coupon logic, wired into GitLab CI", "j1p3": "Integrated multiple payment providers plus bill acceptors and coin hoppers, covering multi-stage change-return and refund flows", "j1p4": "Led the AGP 8.13.2 + Kotlin 2.0 upgrade and built a Jetpack Compose design system with a reusable component library", "j1p5": "Integrated USB / serial / TCP peripherals and maintained LAN NSD device discovery with fault-tolerant background sync", "j2p0": "Modernised a legacy Eclipse project into Android Studio and developed SDK modules", "j2p1": "Introduced MVVM, establishing code structure conventions and lowering maintenance cost", "j2p2": "Built and maintained internal apps that improved operational efficiency company-wide", "sk0v": "Claude Code skills & subagents · MCP servers · multi-stage agent workflow design · review automation · structured output and verification", "sk1v": "Kotlin · Java · Python · TypeScript · Dart", "sk2v": "Jetpack Compose · MVVM (ViewModel / LiveData / Coroutines / Flow) · Room · CameraX · multi-module Gradle · product flavors · AGP 8 · Kotlin 2.0 · Kotlin KMP · Flutter", "sk3v": "JUnit · MockK · Robolectric · GitLab CI · detekt / checkstyle / lint", "sk4v": "USB / serial / TCP · bill acceptors · coin hoppers · thermal receipt and label printers · barcode scanners · LAN NSD device discovery", "sk5v": "Spring Boot · REST API · WebSocket (STOMP)"};
   var nodes = document.querySelectorAll('[data-i]');
   var ZH = {};
   nodes.forEach(function (el) { ZH[el.getAttribute('data-i')] = el.textContent; });
