@@ -71,6 +71,10 @@ J1 = [
   "Led the AGP 8.13.2 + Kotlin 2.0 upgrade and built a Jetpack Compose design system with a reusable component library"),
  ("整合 USB / Serial / TCP 周邊硬體，並維護 LAN NSD 設備探索與離線容錯背景同步",
   "Integrated USB / serial / TCP peripherals and maintained LAN NSD device discovery with fault-tolerant background sync"),
+ ("在 Scrum 流程中以 Jira 票為單位迭代交付；擔任 code reviewer 審查同事的 Merge Request，指出阻擋項與跨產品線的相容性風險，並與 QA 交接問題根因與建議測試項目",
+  "Delivered iteratively against Jira tickets in a Scrum process; acted as a code reviewer on teammates' merge requests, flagging blockers and cross-product-line compatibility risks, and handed off root causes and suggested test cases to QA"),
+ ("接收門市端第一線回饋，與後端、PM 對接後追出根因並提出技術解法，收斂後以回歸測試覆蓋，持續降低結帳中斷與人工介入",
+  "Turned front-line store feedback into root-cause analysis with backend and PM, shipped fixes covered by regression tests, and steadily reduced checkout interruptions and manual intervention"),
 ]
 J2 = [
  ("將舊有 Eclipse 專案翻新為 Android Studio 專案，並開發 SDK 模組",
@@ -79,6 +83,8 @@ J2 = [
   "Introduced MVVM, establishing code structure conventions and lowering maintenance cost"),
  ("開發與維護供公司內部使用的 App，提升公司作業效率",
   "Built and maintained internal apps that improved operational efficiency company-wide"),
+ ("接收使用者回饋並提出對應解決方案，改善實際操作流程",
+  "Collected user feedback and shipped changes that improved real-world operating flows"),
 ]
 SKILLS = [
  ("Agent / AI", "Claude Code skills 與 subagent・MCP server・多階段 agent 工作流設計・review 自動化・結構化輸出與驗證",
